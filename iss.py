@@ -51,6 +51,10 @@ def setup_iss_position():
 	global d_tmp_x
 	global d_tmp_y
 
+	
+	global y
+
+
 	start_point_x = 30
 	start_point_y = 'N'.lower()
 	lat, lng = get_iss_position()
@@ -126,21 +130,27 @@ def main():
    	if x == 1 and d_tmp_x == 60:
    		move_left(280)
    		d_tmp_x = 1
-   		d_tmp_y = 'H'.lower()
+   		d_tmp_y = y.lower()
    		time.sleep(8)
    	else:
 	   	if y != d_tmp_y:
 		   	if all_letters[y] > all_letters[d_tmp_y]:
 		   		move_up()
 		   	else:
-		   		move_down()
+		   		if x > 43: step = 6
+		   		move_down(step)
 		   	d_tmp_y = y
 	   	
 	   	if x != d_tmp_x:
 	   		d_tmp_x = x
 	   		step = 5
-	   		if x > 50: step = 3
+	   		if x > 50: step = 4
+	   		if x > 52: step = 3
 	   		if x > 1 and x < 28: step = 4
+	   		if x > 30  and x < 43: step = 4
+	   		if x > 44  and x < 50: step = 4
+	   		if x > 47  and x < 50: step = 5
+	   		if x > 49: x = 4
 	   		move_right(step)
 		time.sleep(4)
 

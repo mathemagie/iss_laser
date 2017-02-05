@@ -9,8 +9,8 @@ from random import randint
 import utm
 from  LatLongUTMconversion import * 
 
-d_tmp_x = 59
-d_tmp_y  = 'J'.lower()
+d_tmp_x = 27
+d_tmp_y  = 'R'.lower()
 
 simulate = 0
 
@@ -51,14 +51,33 @@ def main():
 
 	all_data = []
 
+	start = 0
+	try:
+		start = sys.argv[1]
+		print start
+	except:
+		pass
+
 	with open('all_data.txt') as fp:
 		for line in fp:
 			if line != "":
 				all_data.append(line.rstrip())
-	all_data =  all_data[50:]
+	
+	if start != 0: 
+		index = 50 + int(start)
+		print index
+		all_data = all_data[index:]
+	else:
+		all_data =  all_data[50:]
 	print all_data
+
+	i = int(start)
+	#print all_data
 	for z in all_data:
-		print "========= " + z
+		print "==================================" + z
+		i = i + 1 
+		print i
+		
 		if len(z) == 3:
 	   		x = int(z[:2])
 	   		y = z[2].lower()
@@ -74,22 +93,30 @@ def main():
 	   	if x == 1 and d_tmp_x == 60:
 	   		move_left(280)
 	   		d_tmp_x = 1
-	   		d_tmp_y = 'H'.lower()
+	   		d_tmp_y = y.lower()
 	   		time.sleep(8)
 	   	else:
 		   	if y != d_tmp_y:
 			   	if all_letters[y] > all_letters[d_tmp_y]:
 			   		move_up()
 			   	else:
-			   		move_down()
+			   		if x > 43: step = 6
+			   		move_down(step)
 			   	d_tmp_y = y
 		   	
 		   	if x != d_tmp_x:
-		   			step = 5
-			   		if x > 50: step = 3
-			   		if x > 1 and x < 25: step = 4
-			   		move_right(step)
-			time.sleep(4)
+		   		d_tmp_x = x
+		   		step = 5 
+		   		if x > 50: step = 4
+		   		if x > 52: step = 3
+		   		if x > 1 and x < 28: step = 4
+		   		if x > 30  and x < 43: step = 4
+		   		if x > 44  and x < 50: step = 4
+		   		if x > 47  and x < 50: step = 5
+		   		if x > 49: x = 4
+	   			move_right(step)
+			time.sleep(3)
+	
 				
 main()
 	
