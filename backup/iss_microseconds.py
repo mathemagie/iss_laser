@@ -11,11 +11,21 @@ from  LatLongUTMconversion import *
 
 d_tmp = ''
 
+start = 900
+end = 700
+
 try:
 	ser = serial.Serial("/dev/cu.usbmodem1411", 9600)   # open serial port that Arduino is using
 except OSError:
 	print "usb failed"
 	sys.exit()
+
+def change_pos_laser():
+	i = start 
+	#ser.write(str(i))
+	print "mov laser"
+	i = i - 11;
+	print i
 
 def get_iss_position():
 	req = urllib2.Request("http://api.open-notify.org/iss-now.json")
@@ -37,7 +47,6 @@ while True:
    	print d
    	if d != d_tmp:
    		d_tmp = d
-   		ser.write("f")
-		print "mov laser"
+   		change_pos_laser
    	print d_tmp
-	time.sleep(5)
+	time.sleep(2)

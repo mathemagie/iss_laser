@@ -9,13 +9,34 @@ from random import randint
 import utm
 from  LatLongUTMconversion import * 
 
-d_tmp = ''
+d_tmp = '0'
+
+start = 900
+end = 700
+
+tmp_start = start
 
 try:
 	ser = serial.Serial("/dev/cu.usbmodem1411", 9600)   # open serial port that Arduino is using
 except OSError:
 	print "usb failed"
-	sys.exit()
+	#sys.exit()
+
+def change_pos_laser(command="f"):
+	#global tmp_start
+	print "mov laser"
+	#ser.write(str(i))
+	#print tmp_start
+	#i = int(tmp_start) - 11;
+	#print i
+	#tmp_start = i
+	ser.write(command)
+
+def send_command(command=""):
+	print "change direction"
+	ser.write(command)
+
+
 
 def get_iss_position():
 	req = urllib2.Request("http://api.open-notify.org/iss-now.json")
@@ -24,20 +45,12 @@ def get_iss_position():
 	return obj['iss_position']['latitude'], obj['iss_position']['longitude']
 
 while True:
-	lat, lng = get_iss_position()
-	lat = float(lat)
-	lng = float(lng)
-	print lat,lng
-	(z, e, n) = LLtoUTM(23,lat, lng)
-   	print z,e,n
-   	if len(z) == 3:
-   		d = int(z[:2])
-   	else:
-   		d = int(z[0])
-   	print d
-   	if d != d_tmp:
-   		d_tmp = d
-   		ser.write("f")
-		print "mov laser"
-   	print d_tmp
-	time.sleep(5)
+	mydata = raw_input('Prompt :')
+	d = str(mydata)
+	send_command(d)
+#  	if d == d_tmp:
+ # 		print "------"
+  #	else:
+   #		d_tmp = d
+   		#change_pos_laser()
+	time.sleep(1)
