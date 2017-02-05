@@ -9,14 +9,8 @@ from random import randint
 import utm
 from  LatLongUTMconversion import * 
 
-try:
-	ser = serial.Serial("/dev/cu.usbmodem1411", 9600)   # open serial port that Arduino is using
-except OSError:
-	print "usb failed"
-	#sys.exit()
+d_tmp = ''
 
-def send_command(command=""):
-	ser.write(command)
 
 def get_iss_position():
 	req = urllib2.Request("http://api.open-notify.org/iss-now.json")
@@ -24,9 +18,24 @@ def get_iss_position():
 	obj = json.loads(response.read())
 	return obj['iss_position']['latitude'], obj['iss_position']['longitude']
 
+def main():
+	global d_tmp
+
+	lat, lng = get_iss_position()
+	lat = float(lat)
+	lng = float(lng)
+	print lat,lng
+	(z, e, n) = LLtoUTM(23,lat, lng)
+   	print z,e,n
+   	if z != d_tmp:
+   		d_tmp = z
+   		print z
+   		file = open("all_data.txt","a")
+   		file.write(z + "\n") 
+   		file.close()
+ 
+	time.sleep(5)
+
 while True:
-	mydata = raw_input('command to send to LASER => ')
-	d = str(mydata)
-	print d
-	send_command(d)
-	time.sleep(1)
+	main()
+	
