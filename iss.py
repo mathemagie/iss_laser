@@ -137,6 +137,7 @@ def main():
 		   	if all_letters[y] > all_letters[d_tmp_y]:
 		   		move_up()
 		   	else:
+		   		step = 7
 		   		if x > 43: step = 6
 		   		move_down(step)
 		   	d_tmp_y = y
@@ -146,7 +147,7 @@ def main():
 	   		step = 5
 	   		if x > 50: step = 4
 	   		if x > 52: step = 3
-	   		if x > 1 and x < 28: step = 4
+	   		if x > 1 and x < 28: step = 3
 	   		if x > 30  and x < 43: step = 4
 	   		if x > 44  and x < 50: step = 4
 	   		if x > 47  and x < 50: step = 5

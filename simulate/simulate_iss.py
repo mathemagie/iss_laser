@@ -9,8 +9,8 @@ from random import randint
 import utm
 from  LatLongUTMconversion import * 
 
-d_tmp_x = 27
-d_tmp_y  = 'R'.lower()
+d_tmp_x = 59
+d_tmp_y  = 'J'.lower()
 
 simulate = 0
 
@@ -69,7 +69,8 @@ def main():
 		all_data = all_data[index:]
 	else:
 		all_data =  all_data[50:]
-	print all_data
+	#print all_data
+	#exit()
 
 	i = int(start)
 	#print all_data
@@ -94,13 +95,14 @@ def main():
 	   		move_left(280)
 	   		d_tmp_x = 1
 	   		d_tmp_y = y.lower()
-	   		time.sleep(8)
+	   		time.sleep(14)
 	   	else:
 		   	if y != d_tmp_y:
 			   	if all_letters[y] > all_letters[d_tmp_y]:
 			   		move_up()
 			   	else:
 			   		if x > 43: step = 6
+			   		step = 7
 			   		move_down(step)
 			   	d_tmp_y = y
 		   	
@@ -115,7 +117,7 @@ def main():
 		   		if x > 47  and x < 50: step = 5
 		   		if x > 49: x = 4
 	   			move_right(step)
-			time.sleep(3)
+			time.sleep(2)
 	
 				
 main()
