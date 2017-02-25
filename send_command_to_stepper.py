@@ -3,7 +3,7 @@ import sys
 import time
 
 try:
-	ser = serial.Serial("/dev/cu.usbmodem1421", 9600)   # open serial port that Arduino is using
+	ser = serial.Serial("/dev/cu.usbmodem1411", 9600)   # open serial port that Arduino is using
 except OSError:
 	print "usb failed"
 	#sys.exit()
