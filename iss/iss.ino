@@ -1,6 +1,7 @@
 String str;
 String command;
 String val_nb_step;
+int delay_step = 1000;
 
 void setup() {
   //moteur des Y (celui du bat)
@@ -12,51 +13,60 @@ void setup() {
   //moteur des X 
   pinMode(8, OUTPUT);
   pinMode(9, OUTPUT);
-  digitalWrite(8, HIGH);//pin de direction HIGH = droite LOW gauhe
+  digitalWrite(8, LOW);//pin de direction HIGH = droite LOW gauhe
   digitalWrite(9, LOW); // ping de step
   
   Serial.begin(9600);
 }
 
 void mv_right(int nb_step) {
-    digitalWrite(8, HIGH);// move to right 
+    digitalWrite(8, LOW);// move to right 
     for (int i=0; i <= nb_step; i++){
       digitalWrite(9, HIGH);
-      delay(10);
+      //delay(delay_step);
+      delayMicroseconds(500);          
+     // delayMicroseconds
       digitalWrite(9, LOW);
-      delay(10);
+      //delay(delay_step);
+       delayMicroseconds(500);         
     }
   
 }
 
 void mv_left(int nb_step) {
-    digitalWrite(8, LOW); // move to left 
+    digitalWrite(8, HIGH); // move to left 
     for (int i=0; i <= nb_step; i++){
       digitalWrite(9, HIGH);
-      delay(10);
+     // delay(delay_step);
+       delayMicroseconds(500);  
       digitalWrite(9, LOW);
-      delay(10);
+     // delay(delay_step);
+       delayMicroseconds(500);  
     }
   
 }
 
 void mv_up(int nb_step) {
     digitalWrite(6, HIGH); // move to UP 
-    for (int i=0; i <= nb_step  ; i++){
+    for (int i=0; i <= nb_step; i++){
       digitalWrite(7, HIGH);
-      delay(10);
+     // delay(delay_step);
+       delayMicroseconds(500);  
       digitalWrite(7, LOW);
-      delay(10);
+     // delay(delay_step);
+       delayMicroseconds(500);  
     }
 }
 
 void mv_down(int nb_step) {
     digitalWrite(6, LOW); // move to DONW 
-    for (int i=0; i <= nb_step ; i++){
+   for (int i=0; i <= nb_step; i++){
       digitalWrite(7, HIGH);
-      delay(10);
+     // delay(delay_step);
+       delayMicroseconds(500);  
       digitalWrite(7, LOW);
-      delay(10);
+     // delay(delay_step);
+       delayMicroseconds(500);  
     }
 }
 
