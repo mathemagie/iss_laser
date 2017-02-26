@@ -9,8 +9,8 @@ from random import randint
 import utm
 from  LatLongUTMconversion import * 
 
-d_tmp_x = 59
-d_tmp_y  = 'J'.lower()
+d_tmp_x = 1
+d_tmp_y  = 'H'.lower()
 
 simulate = 0
 
@@ -22,12 +22,14 @@ except OSError:
 	print "usb failed"
 	sys.exit()
 
+#get ISS posistion
 def get_iss_position():
 	req = urllib2.Request("http://api.open-notify.org/iss-now.json")
 	response = urllib2.urlopen(req)
 	obj = json.loads(response.read())
 	return obj['iss_position']['latitude'], obj['iss_position']['longitude']
 
+#send order by serial port
 def move_right(nb_step=5):
 	print "mov laser right :  " + str(nb_step) 
 	if not simulate: ser.write("r=" + str(nb_step)) 
@@ -58,7 +60,7 @@ def main():
 	except:
 		pass
 
-	with open('all_data.txt') as fp:
+	with open('simulate/all_data.txt') as fp:
 		for line in fp:
 			if line != "":
 				all_data.append(line.rstrip())
@@ -68,9 +70,7 @@ def main():
 		print index
 		all_data = all_data[index:]
 	else:
-		all_data =  all_data[50:]
-	#print all_data
-	#exit()
+		all_data =  all_data[53:]
 
 	i = int(start)
 	#print all_data
