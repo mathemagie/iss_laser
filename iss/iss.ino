@@ -1,21 +1,24 @@
+//define variables
 String str;
 String command;
 String val_nb_step;
 int delay_m = 2000;
 
 void setup() {
-  //moteur des Y (celui du bas)
+  
+  //laser motor (up and down) 
   pinMode(6, OUTPUT);
   pinMode(7, OUTPUT);
-  digitalWrite(6, HIGH);//pin de direction HIGH monte dans les Y lOW descend
-  digitalWrite(7, LOW);//pin de step
+  digitalWrite(6, HIGH);//direction ping HIGH=up lOW=down
+  digitalWrite(7, LOW);//step ping 
   
-  //moteur des X 
+  //left and right motor
   pinMode(8, OUTPUT);
   pinMode(9, OUTPUT);
-  digitalWrite(8, LOW);//pin de direction HIGH = droite LOW gauhe
+  digitalWrite(8, LOW);//ping direction  HIGH = right LOW=left
   digitalWrite(9, LOW); // ping de step
-  
+   
+  //start serial connection
   Serial.begin(9600);
 }
 
