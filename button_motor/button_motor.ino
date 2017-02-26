@@ -1,30 +1,32 @@
-int pinBouton;
-
 void setup()
 {
+   //start serial connection
     Serial.begin(9600);
-    pinBouton=4;
-    pinMode(pinBouton,INPUT_PULLUP);
-     //moteur des X 
+    //configure pin 4 as an input and enable the internal pull-up resistor
+    pinMode(4,INPUT_PULLUP);
+     //motor pins
     pinMode(8, OUTPUT);
     pinMode(9, OUTPUT);
-    digitalWrite(8, HIGH);//pin de direction HIGH = droite LOW gauhe
-    digitalWrite(9, LOW); // ping de step
+    digitalWrite(8, HIGH);//direction pin
+    digitalWrite(9, LOW); // step pin 
 }
+
 void loop()
 {
-    boolean etatBouton=digitalRead(pinBouton);
-    Serial.println(etatBouton);
+    //read the pushbutton value into a variable
+    boolean stateButton=digitalRead(4);
+    //print to serial monitor
+    Serial.println(stateButton);
     
-    if (etatBouton) {
-      digitalWrite(8, LOW); // move to left 
+    if (stateButton) {//change motor rotation when button is pushed
+      digitalWrite(8, LOW); // move to right 
     } else {
        digitalWrite(8, HIGH); // move to left 
     }
-   
-    digitalWrite(9, HIGH);
-    delay(1);
-    digitalWrite(9, LOW);
-    delay(1);
     
+    //rotate motor
+    digitalWrite(9, HIGH);
+    delay(2);
+    digitalWrite(9, LOW);
+    delay(2);
 }
