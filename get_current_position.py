@@ -14,4 +14,4 @@ lat = float(lat)
 lng = float(lng)
 #print lat,lng
 (z, e, n) = LLtoUTM(23,lat, lng)
-print z
+print "ISS position => " + z
