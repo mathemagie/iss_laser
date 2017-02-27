@@ -2,11 +2,8 @@ import serial
 import sys
 import time
 import urllib2
-
 import json
-import math
-from random import randint
-import utm
+
 from  LatLongUTMconversion import * 
 
 d_tmp_x = ''
