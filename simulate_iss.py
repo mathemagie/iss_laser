@@ -102,16 +102,16 @@ def main():
 			   		move_up()
 			   	else:
 			   		if x > 43: step = 6
-			   		step = 7
+			   		step = 6
 			   		move_down(step)
 			   	d_tmp_y = y
 		   	
 		   	if x != d_tmp_x:
 		   		d_tmp_x = x
-		   		step = 5 
+		   		step = 2
 		   		if x > 50: step = 4
 		   		if x > 52: step = 3
-		   		if x > 1 and x < 28: step = 4
+		   		if x > 1 and x < 28: step = 2
 		   		if x > 30  and x < 43: step = 4
 		   		if x > 44  and x < 50: step = 4
 		   		if x > 47  and x < 50: step = 5
